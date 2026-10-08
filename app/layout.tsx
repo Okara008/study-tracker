@@ -29,7 +29,10 @@ return (
 		<body className="min-h-full flex flex-col">
 			<Header/>
 			<CoursesProvider>
-				{children}
+				<div className="mt-17">
+					{children}
+
+				</div>
 			</CoursesProvider>
 		</body>
     </html>
