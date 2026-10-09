@@ -73,7 +73,7 @@ function Page({ params }: { params: Promise<{ id: string }> }) {
                         {topic.isCompleted ? (
                             <button className='text-sm bg-purple-300 text-purple-950 px-3 py-1 rounded-lg font-medium'>Completed</button>
                         ) : (
-                            <button className='text-sm border border-purple-950 text-purple-950 px-3 py-1 rounded-lg font-medium'>Mark to Complete</button>
+                            <button className='text-sm border border-purple-950 text-purple-950 px-3 py-1 rounded-lg font-medium'>Pending</button>
                         )}
                     </div>
                 ))}
