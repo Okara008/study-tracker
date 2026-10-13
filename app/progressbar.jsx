@@ -12,8 +12,15 @@ function ProgressBar({ percentage = 0 }) {
 
             <div className='h-2 w-full overflow-hidden rounded-full bg-slate-200'>
                 <div
-                    className='h-full rounded-full bg-violet-600 transition-all duration-300'
-                    style={{ width: `${safePercentage}%` }}
+                    className='h-full rounded-full bg-violet-600 transition-all duration-300' 
+                    style={{ width: `${safePercentage}%`, backgroundColor: (percentage == 100 ? 
+                                                                                "#16A34A" : 
+                                                                                percentage > 70 ? 
+                                                                                    "#2563EB" : 
+                                                                                    percentage > 29 ? 
+                                                                                        "#7C3AED" : 
+                                                                                        "#E11D48"
+                                                                            ) }}
                 />
             </div>
         </div>

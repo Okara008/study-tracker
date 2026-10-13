@@ -52,14 +52,14 @@ function db() {
     {
         id: 4,
         name: "CSS",
-        progress: 50,
+        progress: 100,
         topics: [
             { name: "Flexbox", isCompleted: true },
             { name: "Grid", isCompleted: true },
-            { name: "Responsive design", isCompleted: false },
+            { name: "Responsive design", isCompleted: true },
             { name: "Selectors", isCompleted: true },
-            { name: "Custom properties", isCompleted: false },
-            { name: "Animations", isCompleted: false }
+            { name: "Custom properties", isCompleted: true },
+            { name: "Animations", isCompleted: true }
         ]
     },
     {
@@ -117,14 +117,14 @@ function db() {
     {
         id: 9,
         name: "Python",
-        progress: 50,
+        progress: 83.33,
         topics: [
             { name: "Syntax", isCompleted: true },
             { name: "Data structures", isCompleted: true },
-            { name: "Functions", isCompleted: false },
+            { name: "Functions", isCompleted: true },
             { name: "Modules", isCompleted: true },
             { name: "Classes", isCompleted: false },
-            { name: "Exceptions", isCompleted: false }
+            { name: "Exceptions", isCompleted: true }
         ]
     },
     {

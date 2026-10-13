@@ -26,7 +26,7 @@ async function courselist() {
 			<div className='grid grid-cols-1 md:grid-cols-2 gap-8 '>
 				{data.map((course: Courses) => (
 					<Link href={`/course/${course.id}`} key={course.id}>
-						<div className='bg-purple-100 w-full shadow-2xs mb-5 rounded-2xl px-6 py-4 transition-all ease-linear active:bg-purple-200 hover:-translate-y-2 hover:shadow-lg hover:cursor-pointer '   style={{backgroundColor: (course.progress > 60 ? "rgba(0, 255, 0, .2)" : course.progress < 30 ?"rgba(255, 0, 0, .2)" : "")}}>
+						<div className='bg-purple-100 w-full shadow-2xs mb-5 rounded-2xl px-6 py-4 transition-all ease-linear active:bg-purple-200 hover:-translate-y-2 hover:shadow-lg hover:cursor-pointer '   >
 							<p className='font-bold text-2xl mb-2'>{course.name}</p>
 							<ProgressBar percentage={course.progress} />
 						</div>
