@@ -81,7 +81,7 @@ function page() {
 	};
 
 	return (
-		<div className="px-5">
+		<div className="mx-auto w-full max-w-2xl px-5">
 			<h2 className="text-3xl mb-8 mt-2 font-black tracking-tight text-slate-900 flex items-center justify-start gap-2">
 				Editing{" "}
 				<b className="w-72 text-ellipsis overflow-hidden inline-block">
