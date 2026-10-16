@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { Suspense } from "react";
-const page = async () => {
-	const response = await fetch("http://localhost:3000/api/courses");
-	const data = await response.json();
+
+import { db } from "@/app/api/db";
+
+export const dynamic = "force-dynamic";
+
+const page = () => {
+	const data = db.getAll();
 
 	type Courses = {
 		id: number;
@@ -31,7 +34,6 @@ const page = async () => {
 					Highlighted Courses
 				</h2>
 
-				<Suspense fallback={<div>loading...</div>}>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
 					{data.map((course: Courses, index: number) => {
 						{
@@ -53,7 +55,6 @@ const page = async () => {
 						}
 					})}
 				</div>
-			</Suspense>
 			</main>
 	);
 };
