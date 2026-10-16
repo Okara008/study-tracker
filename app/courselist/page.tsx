@@ -4,7 +4,7 @@ import Link from 'next/link'
 async function courselist() {
 	const response = await fetch("http://localhost:3000/api/courses")
 	const data = await response.json()
-		type Courses = {
+	type Courses = {
         id: number;
         name: string;
         progress: number;

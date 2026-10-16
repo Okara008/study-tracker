@@ -23,7 +23,6 @@ const page = async() => {
 			rand = Math.floor(Math.random() * data.length)
 		}while(rands.includes(rand))
 			
-		console.log(rand);
 		rands.push(rand)
 	}
 	

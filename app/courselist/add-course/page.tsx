@@ -1,5 +1,7 @@
 'use client'
 import { useRef, useState } from 'react'
+import { addCourse } from '../components/AddCourse'
+
 function page() {
     const [topicValues, setTopicValues] = useState<string[]>([""])
 
@@ -7,7 +9,6 @@ function page() {
         setTopicValues(prev => {
             let copy = [...prev]
             copy.push("")
-            console.log(copy);
             
             return copy
         })
@@ -35,7 +36,7 @@ function page() {
         <div className='px-5'>
             <h2 className='text-3xl mb-8 mt-2 font-black tracking-tight text-slate-900'>Add New Course</h2>
             
-            <form >
+            <form action={addCourse} onSubmit={() => setTopicValues([""])}>
                 <div className='mb-6'>
                     <label htmlFor="name" className='text-lg font-bold leading-3'>Course Title</label><br />
                     <input required type="text" name="name" id="name" className='bg-purple-200 w-full px-3 py-2 rounded-md'/>
@@ -58,7 +59,7 @@ function page() {
                     )}
                 </div>
 
-                <button type='submit'  className='w-full mb-5 bg-purple-900 px-3 py-3 rounded-lg text-white font-bold transition-all ease-linear hover:bg-purple-800 hover:cursor-pointer hover:shadow-2xl active:bg-purple-600 active:scale-[1.02]'>
+                <button type='submit'  className='w-full mb-5 bg-purple-900 px-3 py-3 rounded-lg text-white font-bold transition-all ease-linear hover:bg-purple-800 hover:cursor-pointer hover:shadow-2xl active:bg-purple-600 active:scale-[1.02]' >
                     Submit
                 </button>
             </form>

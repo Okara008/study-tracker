@@ -1,5 +1,5 @@
-import Courses from "@/app/api/db";
+import { db } from "@/app/api/db";
 
 export function GET() {
-    return Response.json(Courses())
+    return Response.json(db.getAll())
 }
