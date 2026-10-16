@@ -1,86 +1,46 @@
-'use client'
+import { db, Topic } from "@/app/api/db";
+import TopicList from "./components/TopicList";
+import ProgressBar from "@/app/progressbar";
+import Link from "next/link";
 
-import { use, useContext } from 'react'
-import { CoursesContext } from '@/context/Courses'
-import ProgressBar from '@/app/progressbar'
+async function Page({ params }: { params: Promise<{ id: string }> }) {
+	const { id } = await params;
 
-function Page({ params }: { params: Promise<{ id: string }> }) {
-    const resolvedParams = use(params)
-    const { courses, setCourses } = useContext(CoursesContext)
-    const course = courses.find(c => c.id === Number(resolvedParams.id))
-    
-    const toggleComplete = (isChecked: boolean, i: number) => {
-        setCourses(prev => {
-            const copy = [...prev];
+	const course = db.getById(Number(id));
 
-            const courseIndex = copy.findIndex(
-                c => c.id === Number(resolvedParams.id)
-            );
+	if (!course) return <p>Course not found.</p>;
 
-            if (courseIndex === -1) {
-                return prev;
-            }
+	return (
+		<div className="px-10">
+			<div className="flex justify-between items-center mt-2 mb-4 gap-8 ">
+				<h2
+					className="cursor-default font-black text-4xl max-w-96 text-ellipsis capitalize overflow-hidden"
+					title={`${course?.name}`}
+				>
+					{course?.name}
+				</h2>
+				<Link
+					className="bg-purple-950 px-2 py-1 font-extralight rounded-lg text-[12px] text-white hover:bg-purple-800 hover:cursor-pointer hover:shadow-2xl hover:shadow-purple-950 active:bg-purple-600 active:scale-110"
+					href={`/course/${id}/edit-course`}
+				>
+					Edit
+				</Link>
+			</div>
 
-            const targetCourse = copy[courseIndex];
-            const topics = [...targetCourse.topics];
+			<div className="w-2/3">
+				<ProgressBar percentage={course?.progress} />
+			</div>
 
-            topics[i] = {
-                ...topics[i],
-                isCompleted: !topics[i].isCompleted
-            };
-
-            let progress = 0
-            for (let i = 0; i < topics.length; i++) {
-                const element = topics[i].isCompleted;
-                if(element){
-                    progress ++
-                }
-            }
-            progress = ((progress / topics.length) * 100)
-
-            copy[courseIndex] = {
-                ...targetCourse,
-                progress: progress,
-                topics: topics
-            };
-
-            return copy;
-        });
-    };
-
-    return (
-    <div className='px-10'>
-        <h2 className='font-black text-4xl mb-4'>{course?.name}</h2>
-        <div className='w-2/3'>
-            <ProgressBar percentage={course?.progress}/>
-        </div>
-
-        <article className='mt-8 mb-4'>
-            <h3 className='text-xl font-semibold mb-4'>Topic(s)</h3>
-            <div className='space-y-3'>
-                {course?.topics.map((topic, index) => (
-                    <div key={topic.name} className='flex items-center gap-4 rounded-xl border border-purple-200 bg-purple-50 px-4 py-3 shadow-sm' >
-                        <input
-                            className='h-4 w-4 accent-violet-600'
-                            type='checkbox'
-                            name={course.name}
-                            id={topic.name}
-                            checked={topic.isCompleted}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => toggleComplete(Boolean(e.target.checked), index)}
-                        />
-                        <label htmlFor={topic.name} className='flex-1 text-base font-medium text-slate-800'>{topic.name}</label>
-
-                        {topic.isCompleted ? (
-                            <button className='text-sm bg-purple-300 text-purple-950 px-3 py-1 rounded-lg font-medium'>Completed</button>
-                        ) : (
-                            <button className='text-sm border border-purple-950 text-purple-950 px-3 py-1 rounded-lg font-medium'>Pending</button>
-                        )}
-                    </div>
-                ))}
-            </div>
-        </article>
-    </div>
-    )
+			<article className="mt-8 mb-4">
+				<h3 className="text-xl font-semibold mb-4">Topic(s)</h3>
+				<TopicList
+					courseId={course?.id}
+					courseName={course?.name}
+					topics={course?.topics}
+				/>
+			</article>
+		</div>
+	);
 }
 
-export default Page
+export default Page;
